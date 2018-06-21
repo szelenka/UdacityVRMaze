@@ -27,6 +27,10 @@ The **Android** apk build file can be found in the **Build.zip** file in this re
 
 See also the list of [contributors](https://github.com/szelenka/UdacityVRMaze/contributors) who participated in this project.
 
+### Assets
+
+- [Mike Koenig](http://soundbible.com/1761-Glass-Breaking.html)
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
