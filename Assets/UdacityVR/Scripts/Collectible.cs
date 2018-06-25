@@ -22,7 +22,6 @@ public class Collectible : MonoBehaviour
 
     void Awake()
     {
-        // If this hologram has an audio clip, add an AudioSource with this clip.
         if (poofAudioFile != null)
         {
             audioGameObject = new GameObject();

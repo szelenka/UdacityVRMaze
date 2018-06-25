@@ -9,30 +9,29 @@ public class Jar : MonoBehaviour {
     GameObject hiddenObject;
 
     [SerializeField]
-    [Tooltip("Audio files to play when Jar is opened")]
-    AudioClip[] openingAudioFile;
-
+    [Tooltip("Prefab to display on click")]
+    private GameObject poofPrefab;
     [SerializeField]
+
     [Tooltip("How fast to rotate this object")]
     private float rotationSpeed = 250.0f;
 
-    float totalRotation = 0f;
+    Quaternion startRotation;
+    Quaternion endRotation;
 
-    AudioSource audioSource;
+    // Declare a float named 'timer' to track the Quaternion.Slerp() interpolation and initialize it to for example '0f'
+    float timer = 0f;
+    // Declare a float named 'rotationTime' to set the Quaternion.Slerp() interpolation speed and initialize it to for example '10f'
+    [SerializeField]
+    [Tooltip("Speed at which doors open")]
+    float rotationTime = 0.2f;
+
     bool isOpening = false;
 
 	// Use this for initialization
     void Start () {
-        audioSource = gameObject.GetComponent<AudioSource>();
-        if (audioSource == null)
-        {
-            audioSource = gameObject.AddComponent<AudioSource>();
-            audioSource.playOnAwake = false;
-            audioSource.clip = openingAudioFile[Random.Range(0, openingAudioFile.Length)];
-            audioSource.spatialBlend = 1;
-            audioSource.dopplerLevel = 0;
-        }
-		
+        startRotation = gameObject.transform.rotation;
+        endRotation = startRotation * Quaternion.Euler(0f, 60f, 0f);
 	}
 	
 	// Update is called once per frame
@@ -41,11 +40,12 @@ public class Jar : MonoBehaviour {
         {
             return;
         }
-        totalRotation += Time.deltaTime * rotationSpeed;
-        gameObject.transform.Rotate(totalRotation, 0, 0, Space.World);
-        if (totalRotation >= 60f) 
+        gameObject.transform.rotation = Quaternion.Slerp(startRotation, endRotation, timer / rotationTime);
+        timer += Time.deltaTime;
+        if (timer >= rotationTime)
         {
             BreakObject();
+            isOpening = false;
         }
         //TODO: throw up in air and fall to ground to open
     }
@@ -54,23 +54,22 @@ public class Jar : MonoBehaviour {
     {
         Debug.Log("Jar::OnClick");
         isOpening = true;
-        GameObject hidden = Instantiate(hiddenObject, gameObject.transform, true) as GameObject;
-        hidden.SetActive(true);
-        BreakObject();
-    }
 
-    private void PlayAudioHapticFeedback()
-    {
-        if (audioSource != null)
-        {
-            audioSource.Play();
-        }
-    } 
+    }
 
     private void BreakObject()
     {
-        // explode mesh and destroy
-        PlayAudioHapticFeedback();
-        Destroy(gameObject, 0.5f);
+        // TODO: explode mesh and destroy
+        GameObject poof = Instantiate<GameObject>(poofPrefab, gameObject.transform.position, hiddenObject.transform.rotation) as GameObject;
+        GameObject hidden = null;
+        if (hiddenObject.name == "Coin")
+        {
+            hidden = Instantiate<GameObject>(hiddenObject, gameObject.transform.position + new Vector3(0f, 1.5f, 0f), hiddenObject.transform.rotation) as GameObject;
+        } else {
+            hidden = Instantiate<GameObject>(hiddenObject, gameObject.transform.position + new Vector3(0f, 0f, 1.5f), hiddenObject.transform.rotation) as GameObject;
+        }
+        hidden.transform.parent = gameObject.transform.parent;
+        hidden.SetActive(true);
+        Destroy(gameObject, 0f);
     }
 }

@@ -15,7 +15,11 @@ public class Key : Collectible {
     {
         if (doorObject == null) 
         {
-            throw new System.Exception("doorObject is not defined");
+            doorObject = (Door)FindObjectOfType(typeof(Door));
+            if (doorObject == null)
+            {
+                throw new System.Exception("doorObject is not defined");
+            }
         }
         base.Start();
     }

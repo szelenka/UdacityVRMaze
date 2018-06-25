@@ -79,6 +79,7 @@ public class Door : MonoBehaviour {
             {
                 opening = false;
                 opened = true;
+                timer = 0f;
                 // re-enable colliders after door is opened
                 Collider[] colliders = gameObject.GetComponentsInChildren<Collider>();
                 foreach (Collider childCollider in colliders)
