@@ -61,13 +61,8 @@ public class Jar : MonoBehaviour {
     {
         // TODO: explode mesh and destroy
         GameObject poof = Instantiate<GameObject>(poofPrefab, gameObject.transform.position, hiddenObject.transform.rotation) as GameObject;
-        GameObject hidden = null;
-        if (hiddenObject.name == "Coin")
-        {
-            hidden = Instantiate<GameObject>(hiddenObject, gameObject.transform.position + new Vector3(0f, 1.5f, 0f), hiddenObject.transform.rotation) as GameObject;
-        } else {
-            hidden = Instantiate<GameObject>(hiddenObject, gameObject.transform.position + new Vector3(0f, 0f, 1.5f), hiddenObject.transform.rotation) as GameObject;
-        }
+
+        GameObject hidden = Instantiate<GameObject>(hiddenObject, gameObject.transform.position + new Vector3(0f, 1.5f, 0f), hiddenObject.transform.rotation) as GameObject;
         hidden.transform.parent = gameObject.transform.parent;
         hidden.SetActive(true);
         Destroy(gameObject, 0f);
