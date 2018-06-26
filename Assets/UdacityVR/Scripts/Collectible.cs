@@ -68,7 +68,7 @@ public class Collectible : MonoBehaviour
         /// - Removes the coin from the scene
 
         // Prints to the console when the method is called
-        Debug.Log("'.OnClick()' was called");
+        Debug.Log("OnClick() was called");
 
         // Display the poof effect and remove the object from the scene
         // Use Instantiate() to create a clone of the 'poofPrefab' prefab at this object's position and with the 'poofPrefab' prefab's rotation
@@ -83,6 +83,9 @@ public class Collectible : MonoBehaviour
     {
         if (audioSource != null)
         {
+            Debug.Log(audioSource.clip.name);
+            audioSource.clip = poofAudioFile;
+            Debug.Log(audioSource.clip.name);
             audioSource.Play();
         }
     } 

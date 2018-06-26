@@ -12,9 +12,9 @@ public class JarPoof : MonoBehaviour {
     AudioSource audioSource;
 
 	// Use this for initialization
-	void Awake () {
+	void Start () {
 
-        Debug.Log("Awake jarpoof");
+        Debug.Log("Start jarpoof");
         audioSource = gameObject.GetComponent<AudioSource>();
         if (audioSource == null)
         {
