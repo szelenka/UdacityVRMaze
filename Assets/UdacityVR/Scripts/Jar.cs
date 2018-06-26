@@ -13,8 +13,8 @@ public class Jar : MonoBehaviour {
     private GameObject poofPrefab;
     [SerializeField]
 
-    [Tooltip("How fast to rotate this object")]
-    private float rotationSpeed = 250.0f;
+    //[Tooltip("How fast to rotate this object")]
+    //private float rotationSpeed = 250.0f;
 
     Quaternion startRotation;
     Quaternion endRotation;
