@@ -19,7 +19,6 @@ The **Android** apk build file can be found in the **Build.zip** file in this re
 ### Installing
 
 - **main scene**: Main.unity
-- **other scenes**:
 
 ## Authors
 
@@ -27,7 +26,7 @@ The **Android** apk build file can be found in the **Build.zip** file in this re
 
 See also the list of [contributors](https://github.com/szelenka/UdacityVRMaze/contributors) who participated in this project.
 
-### Assets
+### Sound Assets
 
 - [Mike Koenig](http://soundbible.com/1761-Glass-Breaking.html)
 
